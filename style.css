@@ -1,0 +1,119 @@
+:root {
+  /* ここを変えるとアプリの色が一気に変わるよ */
+  --bg-color: #1a1a1a;
+  --card-bg: #2d2d2d;
+  --text-color: #ffffff;
+  --accent-color: #4db8ff;
+  --yes-color: #2ecc71;
+  --no-color: #e74c3c;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  overflow: hidden; /* 紙吹雪がはみ出さないように */
+}
+
+#card {
+  background: var(--card-bg);
+  width: 90%;
+  max-width: 400px;
+  padding: 2.5rem 1.5rem;
+  border-radius: 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  border: 1px solid #444;
+  box-sizing: border-box;
+}
+
+#time-label {
+  display: inline-block;
+  background: rgba(77, 184, 255, 0.1);
+  color: var(--accent-color);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+
+h1 {
+  font-size: 1.5rem;
+  margin: 0 0 1.5rem 0;
+  min-height: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+button {
+  appearance: none;
+  border: none;
+  padding: 1.2rem 0;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 16px;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.1s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#yes-btn {
+  background-color: var(--yes-color);
+  box-shadow: 0 4px 0 #27ae60;
+}
+#no-btn {
+  background-color: var(--no-color);
+  box-shadow: 0 4px 0 #c0392b;
+}
+
+button:active {
+  transform: translateY(3px);
+  box-shadow: none;
+}
+
+#message {
+  height: 3rem;
+  margin-bottom: 1rem;
+  color: #f1c40f;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: pre-wrap;
+}
+
+/* 紙吹雪のスタイル設定 */
+.confetti {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  top: -10px;
+  opacity: 0;
+  animation: fall 2.5s forwards;
+  z-index: 999;
+}
+
+@keyframes fall {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(calc(var(--confetti-x) * 1vw), 100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
