@@ -3,20 +3,53 @@
  * 曜日と時間帯に合わせた質問リスト
  */
 const routineData = {
-  // 平日（月〜金）のリスト
   weekday: {
-    morning: { label: "平日 / MORNING", questions: ["くすりは飲んだ？", "着替えはした？", "朝ごはんは食べた？", "歯磨きはした？", "顔は洗った？", "給食セット、ハンカチ・ティッシュは準備した？"] },
-    afternoon: { label: "平日 / AFTERNOON", questions: ["散歩にいった？", "宿題はやった？", "給食セットは出した？", "鉛筆は削った？", "学校から出た手紙は出した？", "洗い物はした？", "洗濯をたたんだ？", "タッチはやった？"] },
-    evening: { label: "平日 / EVENING", questions: ["腕立て伏せはした？", "風呂には入った？", "歯は磨いた？", "薬は飲んだ？"] },
+    morning: {
+      label: "平日 / MORNING",
+      common: ["顔は洗った？", "朝ごはんは食べた？"],
+      extra: {
+        5: ["（金）週末の持ち帰り品は確認した？"], // 5は金曜日
+      },
+    },
+    afternoon: {
+      label: "平日 / AFTERNOON",
+      common: ["顔は洗った？", "朝ごはんは食べた？"],
+      extra: {
+        5: ["（金）週末の持ち帰り品は確認した？"], // 5は金曜日
+      },
+    },
+    evening: {
+      label: "平日 / EVENING",
+      common: ["顔は洗った？", "朝ごはんは食べた？"],
+      extra: {
+        5: ["（金）週末の持ち帰り品は確認した？"], // 5は金曜日
+      },
+    },
   },
-  // 休日（土・日）のリスト
   weekend: {
-    morning: { label: "休日 / MORNING", questions: ["くすりは飲んだ？", "着替えはした？", "朝ごはんは食べた？", "歯磨きはした？", "顔は洗った？"] },
-    afternoon: { label: "休日 / AFTERNOON", questions: ["ボンバー"] },
-    evening: { label: "休日 / EVENING", questions: ["腕立て伏せはした？", "風呂には入った？", "歯は磨いた？", "薬は飲んだ？"] },
+    morning: {
+      label: "休日 / MORNING",
+      common: ["ゆっくり寝られた？"],
+      extra: {
+        6: ["（土）上履きは洗った？"], // 6は土曜日
+      },
+    },
+    afternoon: {
+      label: "休日 / AFTERNOON",
+      common: ["ゆっくり寝られた？"],
+      extra: {
+        6: ["（土）上履きは洗った？"], // 6は土曜日
+      },
+    },
+    evening: {
+      label: "休日 / EVENING",
+      common: ["ゆっくり寝られた？"],
+      extra: {
+        6: ["（土）上履きは洗った？"], // 6は土曜日
+      },
+    },
   },
 };
-
 let currentQuestions = [];
 let currentIndex = 0;
 
@@ -27,8 +60,9 @@ const tLabel = document.getElementById("time-label");
 // 今が「いつ」なのかを判定する関数
 function getTargetData() {
   const now = new Date();
-  const day = now.getDay(); // 0:日, 6:土
+  const day = now.getDay();
   const hour = now.getHours();
+
   const isWeekend = day === 0 || day === 6;
   const dayKey = isWeekend ? "weekend" : "weekday";
 
@@ -36,7 +70,21 @@ function getTargetData() {
   if (hour >= 5 && hour < 11) timeKey = "morning";
   else if (hour >= 11 && hour < 17) timeKey = "afternoon";
 
-  return routineData[dayKey][timeKey];
+  const data = routineData[dayKey][timeKey];
+
+  // --- ここで質問を合体---
+  // まずは共通の質問をコピー
+  let finalQuestions = [...data.common];
+
+  // もし今の曜日（day）専用の追加質問があれば、合体させる
+  if (data.extra && data.extra[day]) {
+    finalQuestions = finalQuestions.concat(data.extra[day]);
+  }
+
+  return {
+    label: data.label,
+    questions: finalQuestions,
+  };
 }
 
 // 質問を更新する関数

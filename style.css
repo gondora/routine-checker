@@ -19,6 +19,49 @@ body {
   min-height: 100vh;
   overflow: hidden; /* 紙吹雪がはみ出さないように */
 }
+a {
+  text-decoration: unset;
+  transition: 0.3s;
+}
+a:hover {
+  opacity: 0.7;
+}
+.link_wrap {
+  background: var(--card-bg);
+  width: 90%;
+  max-width: 400px;
+  padding: 2.5rem 1.5rem;
+  border-radius: 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  border: 1px solid #444;
+  box-sizing: border-box;
+}
+.link_wrap ul {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.link_wrap li {
+  background-color: var(--yes-color);
+  box-shadow: 0 4px 0 #27ae60;
+  appearance: none;
+  border: none;
+  padding: 1.2rem 0;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 16px;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.1s;
+  -webkit-tap-highlight-color: transparent;
+}
+.link_wrap ul a {
+  color: #fff;
+}
 
 #card {
   background: var(--card-bg);
