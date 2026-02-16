@@ -17,7 +17,9 @@ body {
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  overflow: hidden; /* 紙吹雪がはみ出さないように */
+  flex-direction: column;
+  /* overflow: hidden;  */
+  /* 紙吹雪がはみ出さないように */
 }
 a {
   text-decoration: unset;
@@ -89,7 +91,7 @@ a:hover {
 h1 {
   font-size: 1.5rem;
   margin: 0 0 1.5rem 0;
-  min-height: 5rem;
+  /* min-height: 3rem; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -111,14 +113,21 @@ button {
   color: white;
   cursor: pointer;
   transition: transform 0.1s;
+  background-color: #ccc;
   -webkit-tap-highlight-color: transparent;
 }
 
-#yes-btn {
+#capture-btn {
+  width: 100%;
+  margin-bottom: 1rem;
   background-color: var(--yes-color);
   box-shadow: 0 4px 0 #27ae60;
 }
-#no-btn {
+.next-btn {
+  background-color: var(--yes-color);
+  box-shadow: 0 4px 0 #27ae60;
+}
+.prev-btn {
   background-color: var(--no-color);
   box-shadow: 0 4px 0 #c0392b;
 }
@@ -199,4 +208,61 @@ button:active {
   height: 10px;
   background: #4caf50;
   transition: width 0.3s;
+}
+#evidence-container {
+  /* margin: 15px 0; */
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+#evidence-slot {
+  width: 100%;
+  /* max-width: 300px; */
+  min-height: 120px;
+  border: 2px dashed #aaa;
+  border-radius: 12px;
+  background-color: #f9f9f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  color: #888;
+  font-size: 0.9rem;
+}
+
+#evidence-slot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* カメラオーバーレイの基本スタイル */
+#camera-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 2000;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#camera-preview {
+  width: 80%;
+  max-width: 400px;
+  border: 3px solid #00ff00;
+  border-radius: 10px;
+  transform: scaleX(-1);
+}
+
+.countdown {
+  color: #00ff00;
+  font-size: 3rem;
+  font-weight: bold;
+  margin-top: 20px;
 }

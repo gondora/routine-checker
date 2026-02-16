@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Routine Mission System</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        text-align: center;
+        background: #f0f0f0;
+        margin: 0;
+        padding: 20px;
+      }
+      #stats-container {
+        background: white;
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+      }
+      .exp-bar-bg {
+        width: 100%;
+        height: 12px;
+        background: #ddd;
+        border-radius: 6px;
+        overflow: hidden;
+        margin-top: 10px;
+      }
+      #exp-bar-fill {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, #4caf50, #8bc34a);
+        transition: width 0.5s;
+      }
+
+      /* タスクカードのデザイン */
+      .task-card {
+        background: white;
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 15px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      }
+      .task-info {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .evidence-slot {
+        width: 100%;
+        min-height: 80px;
+        background: #fafafa;
+        border: 2px dashed #ccc;
+        border-radius: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+      }
+      .log-item {
+        width: 100%;
+        max-width: 200px;
+        height: auto;
+        border-radius: 5px;
+      }
+
+      button {
+        padding: 10px 20px;
+        background: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+      }
+      #camera-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        z-index: 1000;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      #camera-preview {
+        width: 90%;
+        max-width: 400px;
+        border: 4px solid #00ff00;
+        border-radius: 15px;
+        transform: scaleX(-1);
+      }
+      .countdown {
+        color: #00ff00;
+        font-size: 2rem;
+        font-weight: bold;
+        margin-top: 10px;
+      }
+      #status-msg {
+        color: #555;
+        font-size: 0.8rem;
+        margin: 10px 0;
+        min-height: 1.2em;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="stats-container">
+      <div>
+        <strong>USER LEVEL: <span id="level-val">1</span></strong>
+      </div>
+      <div class="exp-bar-bg"><div id="exp-bar-fill"></div></div>
+      <small>EXP: <span id="exp-val">0</span> / 100</small>
+    </div>
+
+    <div style="margin: 10px 0">
+      <button onclick="resetLocalData()" style="background: #dc3545; font-size: 0.7rem; padding: 5px 10px">一時的データリセット</button>
+    </div>
+
+    <div id="status-msg"></div>
+
+    <div class="task-card">
+      <div class="task-info">
+        <span>💊 <b>朝の薬を飲む</b></span>
+        <button onclick="startMission('meds_morning')">撮影</button>
+      </div>
+      <div class="evidence-slot" id="slot-meds_morning">証拠未提出</div>
+    </div>
+
+    <div class="task-card">
+      <div class="task-info">
+        <span>📖 <b>午後の学習（30分）</b></span>
+        <button onclick="startMission('study_afternoon')">撮影</button>
+      </div>
+      <div class="evidence-slot" id="slot-study_afternoon">証拠未提出</div>
+    </div>
+
+    <div class="task-card">
+      <div class="task-info">
+        <span>🧘 <b>夜のストレッチ</b></span>
+        <button onclick="startMission('stretch_night')">撮影</button>
+      </div>
+      <div class="evidence-slot" id="slot-stretch_night">証拠未提出</div>
+    </div>
+
+    <div id="camera-overlay">
+      <video id="camera-preview" autoplay playsinline></video>
+      <div class="countdown" id="timer">準備はいい？</div>
+      <canvas id="shutter-canvas" style="display: none"></canvas>
+    </div>
+
+    <script>
+      const GAS_URL = "https://script.google.com/macros/s/AKfycbxxs0YhMz5NOsM7nhxB0xRT9_g0whbTMt71n6-6kpbojTnsXHNsmhJS2Ph1FdQCUNd6qQ/exec";
+
+      let exp = parseInt(localStorage.getItem("test_exp") || "0");
+      let level = parseInt(localStorage.getItem("test_level") || "1");
+      let db;
+
+      const request = indexedDB.open("RoutineMissionDB", 1);
+      request.onupgradeneeded = (e) => {
+        e.target.result.createObjectStore("photos", { keyPath: "taskId" });
+      };
+      request.onsuccess = (e) => {
+        db = e.target.result;
+        updateUI();
+        loadSavedPhotos();
+      };
+
+      async function startMission(taskId) {
+        const overlay = document.getElementById("camera-overlay");
+        const video = document.getElementById("camera-preview");
+        const timer = document.getElementById("timer");
+
+        try {
+          const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" } });
+          video.srcObject = stream;
+          overlay.style.display = "flex";
+
+          let count = 3;
+          timer.innerText = count;
+          const interval = setInterval(() => {
+            count--;
+            timer.innerText = count > 0 ? count : "SHUTTER!";
+            if (count <= 0) clearInterval(interval);
+          }, 1000);
+
+          setTimeout(async () => {
+            const dataUrl = capturePhoto(video, taskId);
+            stream.getTracks().forEach((track) => track.stop());
+            overlay.style.display = "none";
+            sendToCloud(dataUrl, taskId);
+            gainExp(34);
+          }, 3500);
+        } catch (err) {
+          alert("カメラエラー: " + err);
+        }
+      }
+
+      function capturePhoto(video, taskId) {
+        const canvas = document.getElementById("shutter-canvas");
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        canvas.getContext("2d").drawImage(video, 0, 0);
+        const dataUrl = canvas.toDataURL("image/jpeg", 0.5);
+
+        renderImage(taskId, dataUrl);
+
+        if (db) {
+          const transaction = db.transaction(["photos"], "readwrite");
+          transaction.objectStore("photos").put({
+            taskId: taskId,
+            image: dataUrl,
+            date: new Date().toLocaleDateString(),
+          });
+        }
+        return dataUrl;
+      }
+
+      function renderImage(taskId, dataUrl) {
+        const slot = document.getElementById(`slot-${taskId}`);
+        if (slot) {
+          slot.innerHTML = `<img src="${dataUrl}" class="log-item">`;
+          slot.style.border = "none";
+        }
+      }
+
+      async function sendToCloud(dataUrl, taskId) {
+        const msg = document.getElementById("status-msg");
+        if (msg) msg.innerText = "クラウド同期中...";
+
+        try {
+          await fetch(GAS_URL, {
+            method: "POST",
+            mode: "no-cors",
+            body: JSON.stringify({
+              userId: "syuji", // ★ここを "syuji" や "yuto" に書き換えるのよ！
+              taskId: taskId, // ここに 'morning' 等が渡されるわ
+              image: dataUrl,
+              timestamp: new Date().toLocaleString(),
+            }),
+          });
+          if (msg) msg.innerText = "同期完了！";
+        } catch (err) {
+          if (msg) msg.innerText = "同期失敗...";
+        }
+      }
+
+      function loadSavedPhotos() {
+        if (!db) return;
+        const transaction = db.transaction(["photos"], "readonly");
+        const store = transaction.objectStore("photos");
+        const today = new Date().toLocaleDateString();
+
+        store.openCursor().onsuccess = (e) => {
+          const cursor = e.target.result;
+          if (cursor) {
+            if (cursor.value.date === today) {
+              renderImage(cursor.value.taskId, cursor.value.image);
+            }
+            cursor.continue();
+          }
+        };
+      }
+
+      function gainExp(amount) {
+        exp += amount;
+        if (exp >= 100) {
+          level++;
+          exp -= 100;
+          alert("LEVEL UP!");
+        }
+        localStorage.setItem("test_exp", exp);
+        localStorage.setItem("test_level", level);
+        updateUI();
+      }
+
+      function updateUI() {
+        document.getElementById("level-val").innerText = level;
+        document.getElementById("exp-val").innerText = exp;
+        document.getElementById("exp-bar-fill").style.width = exp + "%";
+      }
+
+      /**
+       * ローカルの画像データをすべて削除してリロードする（デバッグ用）
+       */
+      function resetLocalData() {
+        if (!confirm("ローカルの画像データをすべて消去するわよ。いいのね？")) return;
+
+        if (!db) {
+          alert("データベースが準備できていないわ。");
+          return;
+        }
+
+        const transaction = db.transaction(["photos"], "readwrite");
+        const store = transaction.objectStore("photos");
+        const clearRequest = store.clear(); // 全データを削除
+
+        clearRequest.onsuccess = () => {
+          alert("ローカルデータを消去したわ。ページをリロードするわよ。");
+          location.reload(); // 画面を真っさらな状態に戻す
+        };
+
+        clearRequest.onerror = (err) => {
+          console.error("リセット失敗:", err);
+          alert("リセットに失敗したわ。");
+        };
+      }
+    </script>
+  </body>
+</html>

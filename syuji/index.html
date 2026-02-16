@@ -4,22 +4,38 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Artifact-Lab Routine App</title>
-    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="../common/style.css" />
   </head>
   <body>
     <div id="card">
       <div id="time-label">LOADING...</div>
-
       <h1 id="question-text">準備中...</h1>
 
-      <div id="message"></div>
+      <div id="evidence-container">
+        <div id="evidence-slot">
+          <span id="slot-placeholder">証拠未提出</span>
+        </div>
+      </div>
+
+      <button id="capture-btn" onclick="startCapture()" style="width: 100%; margin-bottom: 1rem">撮影する</button>
 
       <div class="btn-container" id="controls">
-        <button id="no-btn" onclick="handleAnswer(false)">NO</button>
-        <button id="yes-btn" onclick="handleAnswer(true)">YES</button>
+        <button id="prev-btn" class="prev-btn" onclick="goToPrevQuestion()">前へ</button>
+        <button id="next-btn" onclick="goToNextQuestion()" disabled>次へ進む</button>
       </div>
     </div>
 
-    <script src="script.js"></script>
+    <div id="camera-overlay">
+      <video id="camera-preview" autoplay playsinline></video>
+      <div class="countdown" id="timer">3</div>
+      <canvas id="shutter-canvas" style="display: none"></canvas>
+    </div>
+
+    <div style="margin-top: 20px; text-align: center">
+      <button onclick="resetLocalData()" style="background: #dc3545; font-size: 0.7rem; padding: 5px 10px; color: white; border: none; border-radius: 5px">一時的データリセット</button>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="../common/script.js"></script>
   </body>
 </html>
