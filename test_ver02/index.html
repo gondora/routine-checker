@@ -3,8 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mission System Test</title>
+    <title>Mission System Test - Cloud Sync</title>
     <style>
+      /* 既存のスタイルはそのまま使いなさい */
       body {
         font-family: sans-serif;
         text-align: center;
@@ -33,7 +34,6 @@
         background: linear-gradient(90deg, #4caf50, #8bc34a);
         transition: width 0.5s;
       }
-
       .task-card {
         background: white;
         padding: 20px;
@@ -51,8 +51,10 @@
         border-radius: 5px;
         cursor: pointer;
       }
-
-      /* カメラオーバーレイ */
+      button:disabled {
+        background: #ccc;
+        cursor: not-allowed;
+      }
       #camera-overlay {
         display: none;
         position: fixed;
@@ -79,8 +81,6 @@
         font-weight: bold;
         margin-top: 10px;
       }
-
-      /* ログ表示 */
       #log-gallery {
         display: flex;
         flex-wrap: wrap;
@@ -95,6 +95,11 @@
         border-radius: 5px;
         border: 2px solid white;
       }
+      #status-msg {
+        color: #555;
+        font-size: 0.8rem;
+        margin-top: 10px;
+      }
     </style>
   </head>
   <body>
@@ -108,9 +113,10 @@
 
     <div class="task-card">
       <span>朝の薬を飲む（証拠が必要！）</span>
-      <button onclick="startMission('meds')">ミッション開始</button>
+      <button id="mission-btn" onclick="startMission('meds')">ミッション開始</button>
     </div>
 
+    <div id="status-msg"></div>
     <div id="log-gallery"></div>
 
     <div id="camera-overlay">
@@ -120,23 +126,26 @@
     </div>
 
     <script>
+      // 【最重要】ここにアンタのウェブアプリURLを貼り付けなさい！
+      const GAS_URL = "https://script.google.com/macros/s/XXXXX/exec";
+
       let exp = parseInt(localStorage.getItem("test_exp") || "0");
       let level = parseInt(localStorage.getItem("test_level") || "1");
 
-      // 1. 起動時にステータスを反映
       updateUI();
 
       async function startMission(taskId) {
         const overlay = document.getElementById("camera-overlay");
         const video = document.getElementById("camera-preview");
         const timer = document.getElementById("timer");
+        const btn = document.getElementById("mission-btn");
 
         try {
           const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" } });
           video.srcObject = stream;
           overlay.style.display = "flex";
+          btn.disabled = true; // 重複送信防止よ
 
-          // 3秒カウントダウン
           let count = 3;
           timer.innerText = count;
           const interval = setInterval(() => {
@@ -145,33 +154,64 @@
             if (count <= 0) clearInterval(interval);
           }, 1000);
 
-          // 3.5秒後に撮影
-          setTimeout(() => {
-            captureAndSave(video, taskId);
+          setTimeout(async () => {
+            const dataUrl = capturePhoto(video);
+
+            // ストップ処理を優先
             stream.getTracks().forEach((track) => track.stop());
             overlay.style.display = "none";
-            gainExp(34); // テスト用に多めの経験値
+
+            // GAS送信（非同期で裏で走らせるわ）
+            sendToCloud(dataUrl, taskId);
+
+            gainExp(34);
+            btn.disabled = false;
           }, 3500);
         } catch (err) {
           alert("カメラエラー: " + err);
+          btn.disabled = false;
         }
       }
 
-      function captureAndSave(video, taskId) {
+      function capturePhoto(video) {
         const canvas = document.getElementById("shutter-canvas");
         canvas.width = video.videoWidth;
         canvas.height = video.videoHeight;
         canvas.getContext("2d").drawImage(video, 0, 0);
 
+        // 圧縮してBase64化
         const dataUrl = canvas.toDataURL("image/jpeg", 0.5);
 
-        // ログとして画面に追加（視覚的フィードバック）
+        // プレビュー表示
         const img = document.createElement("img");
         img.src = dataUrl;
         img.className = "log-item";
         document.getElementById("log-gallery").prepend(img);
 
-        console.log(`Saved task: ${taskId}`);
+        return dataUrl;
+      }
+
+      async function sendToCloud(dataUrl, taskId) {
+        const statusMsg = document.getElementById("status-msg");
+        statusMsg.innerText = "クラウドに保存中...";
+
+        try {
+          // no-corsモードでリクエストを投げるわ
+          await fetch(GAS_URL, {
+            method: "POST",
+            mode: "no-cors",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              taskId: taskId,
+              image: dataUrl,
+              timestamp: new Date().toLocaleString(),
+            }),
+          });
+          statusMsg.innerText = "保存完了！ドライブを確認しなさい。";
+        } catch (err) {
+          console.error(err);
+          statusMsg.innerText = "送信エラー。コンソールを見なさい。";
+        }
       }
 
       function gainExp(amount) {
