@@ -52,7 +52,7 @@ function getTargetData() {
 
   let tKey = "evening";
   if (hour >= 5 && hour < 11) tKey = "morning";
-  else if (hour >= 11 && hour < 17) tKey = "afternoon";
+  else if (hour >= 11 && hour < 18) tKey = "afternoon";
 
   const data = routineData[dayKey][tKey];
   let finalQuestions = [...data.common];
