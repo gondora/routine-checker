@@ -1,6 +1,6 @@
 /**
  * Artifact-Lab Routine App - Common Logic
- * window.userConfig から設定を読み込むわよ。
+ * 時間帯の切り替わりを検知して自動リセット
  */
 
 // --- 1. 設定の同期 ---
@@ -12,7 +12,7 @@ const GAS_URL = "https://script.google.com/macros/s/AKfycbxxs0YhMz5NOsM7nhxB0xRT
 
 let currentQuestions = [];
 let currentIndex = 0;
-let timeKey = "";
+let timeKey = ""; // 前回の時間帯を保持
 let db;
 
 // --- 2. IndexedDBの準備 ---
@@ -23,15 +23,21 @@ request.onupgradeneeded = (e) => {
 request.onsuccess = (e) => {
   db = e.target.result;
   initializeApp(); // DB接続後に初期化
-  updateQuestion(); 
+  updateQuestion();
 };
 
-// --- 3. 初期化ロジック ---
+// --- 3. 初期化ロジック  ---
 function initializeApp() {
   const data = getTargetData();
+
+  // もし前回の時間帯と今の時間帯が違っていたら、進捗をリセット
+  if (timeKey !== "" && timeKey !== data.timeKey) {
+    currentIndex = 0; // 進捗を最初に戻す
+  }
+
   currentQuestions = data.questions;
-  timeKey = data.timeKey;
-  
+  timeKey = data.timeKey; // 現在の時間帯を保存
+
   const tLabel = document.getElementById("time-label");
   if (tLabel) tLabel.innerText = data.label;
 }
@@ -41,7 +47,7 @@ function getTargetData() {
   const now = new Date();
   const day = now.getDay();
   const hour = now.getHours();
-  const isWeekend = (day === 0 || day === 6);
+  const isWeekend = day === 0 || day === 6;
   const dayKey = isWeekend ? "weekend" : "weekday";
 
   let tKey = "evening";
@@ -72,20 +78,20 @@ function updateQuestion() {
     const currentQ = currentQuestions[currentIndex];
     qText.innerText = currentQ.text;
 
-    // 撮影要否によるUI制御
+    // --- 物理的なリセット処理 (引き継ぎ無くす) ---
+    if (slot) {
+      slot.innerHTML = `<span id="slot-placeholder">しゃしんがまだ無いよ</span>`;
+      slot.style.border = "2px dashed #aaa";
+    }
+
     if (currentQ.needsPhoto) {
       if (evidenceContainer) evidenceContainer.style.display = "block";
-      if (slot) {
-        slot.innerHTML = `<span id="slot-placeholder">証拠未提出</span>`;
-        slot.style.border = "2px dashed #aaa";
-      }
       if (captureBtn) captureBtn.style.display = "block";
       if (nextBtn) {
         nextBtn.disabled = true;
         nextBtn.classList.remove("next-btn");
       }
     } else {
-      // 撮影不要ならスロットごと隠すわよ
       if (evidenceContainer) evidenceContainer.style.display = "none";
       if (captureBtn) captureBtn.style.display = "none";
       if (nextBtn) {
@@ -95,12 +101,11 @@ function updateQuestion() {
     }
 
     if (prevBtn) {
-      prevBtn.disabled = (currentIndex === 0);
-      prevBtn.style.opacity = (currentIndex === 0) ? "0.5" : "1";
+      prevBtn.disabled = currentIndex === 0;
+      prevBtn.style.opacity = currentIndex === 0 ? "0.5" : "1";
     }
 
-    restoreSavedImage();
-
+    restoreSavedImage(); // 今の時間帯に撮った画像があれば出現
   } else {
     qText.innerText = "すべてのタスク完了！\nよくがんばったわね！";
     const controls = document.getElementById("controls");
@@ -109,7 +114,7 @@ function updateQuestion() {
   }
 }
 
-// --- 5. カメラ・保存・送信 ---
+// --- 5. カメラ・保存・送信 (外カメラ優先・左右反転なし) ---
 async function startCapture() {
   const overlay = document.getElementById("camera-overlay");
   const video = document.getElementById("camera-preview");
@@ -117,9 +122,8 @@ async function startCapture() {
   const taskId = `${timeKey}_${currentIndex}`;
 
   try {
-    // 外カメラ(environment)を優先するわよ
-    const stream = await navigator.mediaDevices.getUserMedia({ 
-      video: { facingMode: "environment" } 
+    const stream = await navigator.mediaDevices.getUserMedia({
+      video: { facingMode: "environment" },
     });
     video.srcObject = stream;
     overlay.style.display = "flex";
@@ -128,21 +132,20 @@ async function startCapture() {
     timer.innerText = count;
     const interval = setInterval(() => {
       count--;
-      timer.innerText = (count > 0) ? count : "SHUTTER!";
+      timer.innerText = count > 0 ? count : "SHUTTER!";
       if (count <= 0) clearInterval(interval);
     }, 1000);
 
     setTimeout(async () => {
       const canvas = document.getElementById("shutter-canvas");
-      canvas.width = video.videoWidth; 
+      canvas.width = video.videoWidth;
       canvas.height = video.videoHeight;
       const ctx = canvas.getContext("2d");
-      
-      // 外カメラなら左右反転は不要よ
+
       ctx.drawImage(video, 0, 0);
-      
+
       const dataUrl = canvas.toDataURL("image/jpeg", 0.5);
-      stream.getTracks().forEach(track => track.stop());
+      stream.getTracks().forEach((track) => track.stop());
       overlay.style.display = "none";
 
       renderImage(dataUrl);
@@ -155,13 +158,15 @@ async function startCapture() {
         nextBtn.classList.add("next-btn");
       }
     }, 3500);
-  } catch (err) { alert("カメラエラー: " + err); }
+  } catch (err) {
+    alert("カメラエラー: " + err);
+  }
 }
 
 function renderImage(dataUrl) {
   const slot = document.getElementById("evidence-slot");
   const evidenceContainer = document.getElementById("evidence-container");
-  if (evidenceContainer) evidenceContainer.style.display = "block"; // 画像があるなら出す
+  if (evidenceContainer) evidenceContainer.style.display = "block";
   if (slot) {
     slot.innerHTML = `<img src="${dataUrl}" style="width:100%; height:100%; object-fit:cover;">`;
     slot.style.border = "none";
@@ -195,36 +200,44 @@ function restoreSavedImage() {
 
 async function sendToCloud(dataUrl, taskCategory) {
   try {
-    await fetch(GAS_URL, { 
-      method: "POST", 
-      mode: "no-cors", 
-      body: JSON.stringify({ userId: CURRENT_USER, taskId: taskCategory, image: dataUrl }) 
+    await fetch(GAS_URL, {
+      method: "POST",
+      mode: "no-cors",
+      body: JSON.stringify({ userId: CURRENT_USER, taskId: taskCategory, image: dataUrl }),
     });
-  } catch (err) { console.error("Cloud Error:", err); }
+  } catch (err) {
+    console.error("Cloud Error:", err);
+  }
 }
 
 // --- 6. ナビゲーション & 演出 ---
-function goToNextQuestion() { currentIndex++; updateQuestion(); }
-function goToPrevQuestion() { if (currentIndex > 0) { currentIndex--; updateQuestion(); } }
-function resetLocalData() { 
-  if (confirm("リセットするわよ？")) { 
-    const transaction = db.transaction(["photos"], "readwrite"); 
-    transaction.objectStore("photos").clear().onsuccess = () => location.reload(); 
-  } 
+function goToNextQuestion() {
+  currentIndex++;
+  updateQuestion();
+}
+function goToPrevQuestion() {
+  if (currentIndex > 0) {
+    currentIndex--;
+    updateQuestion();
+  }
+}
+function resetLocalData() {
+  if (confirm("リセットしますか？")) {
+    const transaction = db.transaction(["photos"], "readwrite");
+    transaction.objectStore("photos").clear().onsuccess = () => location.reload();
+  }
 }
 
 function triggerConfetti() {
   for (let i = 0; i < 100; i++) {
-    const confetti = document.createElement("div"); 
-    confetti.className = "confetti"; 
+    const confetti = document.createElement("div");
+    confetti.className = "confetti";
     document.body.appendChild(confetti);
-    const startX = Math.random() * 100; 
+    const startX = Math.random() * 100;
     const endX = (Math.random() - 0.5) * 60;
-    confetti.style.left = startX + "vw"; 
+    confetti.style.left = startX + "vw";
     confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 70%)`;
-    confetti.style.animationDelay = Math.random() * 0.8 + "s"; 
+    confetti.style.animationDelay = Math.random() * 0.8 + "s";
     confetti.style.setProperty("--confetti-x", endX);
   }
 }
-
-window.onload = () => { /* IndexedDBの成功待ちよ */ };
