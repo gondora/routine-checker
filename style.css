@@ -160,3 +160,43 @@ button:active {
     opacity: 0;
   }
 }
+/* カメラオーバーレイ */
+#camera-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 1000;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+#camera-preview {
+  width: 80%;
+  max-width: 400px;
+  border: 5px solid #00ff00;
+  border-radius: 20px;
+}
+
+/* 経験値バーの簡易表示 */
+#stats-container {
+  position: sticky;
+  top: 0;
+  background: #eee;
+  padding: 10px;
+  text-align: center;
+  border-bottom: 2px solid #ccc;
+}
+.exp-bar-bg {
+  width: 100%;
+  height: 10px;
+  background: #ddd;
+}
+.exp-bar-fill {
+  height: 10px;
+  background: #4caf50;
+  transition: width 0.3s;
+}
