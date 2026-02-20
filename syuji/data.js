@@ -36,7 +36,7 @@ window.userConfig = {
           { text: "靴は乾かした？(うにの散歩が終わったら実行)", needsPhoto: true },
         ],
         extra: {
-          5: [{ text: "（金）週末の持ち帰り品を確認！", needsPhoto: true }],
+          // 5: [{ text: "（金）週末の持ち帰り品を確認！", needsPhoto: true }],
         },
       },
       evening: {
