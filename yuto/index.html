@@ -17,12 +17,13 @@
         </div>
       </div>
 
-      <button id="capture-btn" onclick="startCapture()" style="width: 100%; margin-bottom: 1rem">撮影する</button>
+      <button id="capture-btn" class="w100p mb_1rem button" onclick="startCapture()">撮影する</button>
 
-      <div class="btn-container" id="controls">
-        <button id="prev-btn" class="prev-btn" onclick="goToPrevQuestion()">前へ</button>
-        <button id="next-btn" onclick="goToNextQuestion()" disabled>次へ進む</button>
+      <div class="btn-container mb_1rem" id="controls">
+        <button id="prev-btn" class="button" onclick="goToPrevQuestion()">前へ</button>
+        <button id="next-btn" class="button" onclick="goToNextQuestion()" disabled>次へ進む</button>
       </div>
+      <a class="button w100p" href="../index.html">TOPへ戻る</a>
     </div>
 
     <div id="camera-overlay">
@@ -32,7 +33,7 @@
     </div>
 
     <div style="margin-top: 20px; text-align: center">
-      <button onclick="resetLocalData()" style="background: #dc3545; font-size: 0.7rem; padding: 5px 10px; color: white; border: none; border-radius: 5px">一時的データリセット</button>
+      <button onclick="resetLocalData()" style="background: #dc3545; font-size: 0.7rem; padding: 5px 10px; color: white; border: none; border-radius: 5px">データリセット</button>
     </div>
 
     <script src="data.js"></script>
