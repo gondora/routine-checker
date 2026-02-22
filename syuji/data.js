@@ -22,7 +22,10 @@ window.userConfig = {
           { text: "持ち物(ハンカチ、ティッシュ)", needsPhoto: true },
         ],
         extra: {
-          1: [{ text: "（月）パジャマを選択のかごに入れる！", needsPhoto: true }],
+          1: [
+            { text: "（月）パジャマを選択のかごに入れる！", needsPhoto: true },
+            // { text: "（月）bonba- ！", needsPhoto: true },
+          ],
           3: [{ text: "（水）パジャマを選択のかごに入れる！", needsPhoto: true }],
           5: [{ text: "（金）パジャマを選択のかごに入れる！", needsPhoto: true }],
           
@@ -76,8 +79,10 @@ window.userConfig = {
         ],
         // --- ここに曜日別の追加質問を入れられるわよ ---
         extra: {
-          0: [{ text: "爪は切った？", needsPhoto: true }],          
-          0: [{ text: "（日）パジャマを選択のかごに入れる！", needsPhoto: true }],
+          0: [
+            { text: "爪は切った？", needsPhoto: true },
+            { text: "（日）パジャマを選択のかごに入れる！", needsPhoto: true }
+          ], 
           //   0: [{ text: "（金）給食着は持った？", needsPhoto: true }], // 5は金曜日
         },
       },

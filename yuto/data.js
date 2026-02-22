@@ -36,7 +36,7 @@ window.userConfig = {
       evening: {
         label: "平日 / EVENING",
         common: [
-          { text: "ウニの餌はやった？", needsPhoto: false },
+          { text: "ウニの餌はやった？", needsPhoto: true },
           { text: "歯は磨いた？", needsPhoto: false },
           { text: "ウニのシートはやった？", needsPhoto: true },
           { text: "ウニの水は交換した？", needsPhoto: true },
@@ -50,12 +50,14 @@ window.userConfig = {
           { text: "歯磨きはした？", needsPhoto: false },
           { text: "顔は洗った？", needsPhoto: false },
           { text: "ウニの散歩にいった？", needsPhoto: false },
-          { text: "ピアノはやった？", needsPhoto: false },
+          { text: "ピアノはやった？", needsPhoto: true },
         ],
         extra: {
-          6: [{ text: "ピアノの準備はした？", needsPhoto: false }], // 6は土曜日
-          0: [{ text: "爪は切った？", needsPhoto: false }], // 0は土曜日
-          0: [{ text: "ピアノはやった？", needsPhoto: false }], // 0は日曜日
+          6: [{ text: "ピアノの準備はした？", needsPhoto: true }], // 6は土曜日
+          0: [
+            { text: "爪は切った？", needsPhoto: true },
+            { text: "ピアノはやった？", needsPhoto: true },
+          ], 
         },
       },
       afternoon: {
@@ -66,7 +68,7 @@ window.userConfig = {
         label: "休日 / EVENING",
         common: [
           { text: "ウニの散歩にいった？", needsPhoto: false },
-          { text: "ウニの餌はやった？", needsPhoto: false },
+          { text: "ウニの餌はやった？", needsPhoto: true },
           { text: "歯は磨いた？", needsPhoto: false },
           { text: "ウニのシートはやった？", needsPhoto: true },
           { text: "ウニの水は交換した？", needsPhoto: true },
