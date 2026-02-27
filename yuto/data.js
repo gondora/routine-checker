@@ -31,6 +31,7 @@ window.userConfig = {
           { text: "洗濯をたたんだ？", needsPhoto: true },
           { text: "ピアノはやった？", needsPhoto: true },
           { text: "靴は乾かした？", needsPhoto: true },
+          { text: "机の上にものはおいていないか？", needsPhoto: true },
         ],
       },
       evening: {
@@ -39,8 +40,8 @@ window.userConfig = {
           { text: "ウニの餌はやった？", needsPhoto: true },
           { text: "歯は磨いた？", needsPhoto: false },
           { text: "ウニのシートはやった？", needsPhoto: true },
-          { text: "ウニの水は交換した？", needsPhoto: true },
-        ],
+          { text: "ウニの水は交換した？", needsPhoto: true },      
+        { text: "机の上にものはおいていないか？", needsPhoto: true },  ],
       },
     },
     weekend: {
@@ -72,6 +73,7 @@ window.userConfig = {
           { text: "歯は磨いた？", needsPhoto: false },
           { text: "ウニのシートはやった？", needsPhoto: true },
           { text: "ウニの水は交換した？", needsPhoto: true },
+         { text: "机の上にものはおいていないか？", needsPhoto: true },
         ],
       },
     },

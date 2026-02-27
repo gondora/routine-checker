@@ -16,8 +16,6 @@ window.userConfig = {
           { text: "歯磨きはした？", needsPhoto: false },
           { text: "顔は洗った？", needsPhoto: false },
           { text: "持ち物(給食セット)", needsPhoto: true },
-          { text: "持ち物(手袋)", needsPhoto: true },
-          { text: "持ち物(帽子)", needsPhoto: true },
           { text: "持ち物(鍵)", needsPhoto: true },
           { text: "持ち物(ハンカチ、ティッシュ)", needsPhoto: true },
         ],
@@ -42,10 +40,10 @@ window.userConfig = {
           { text: "洗い物はした？", needsPhoto: true },
           { text: "洗濯をたたんだ？", needsPhoto: true },
           { text: "タッチはやった？", needsPhoto: true },
-          { text: "靴は乾かした？(うにの散歩が終わったら実行)", needsPhoto: true },
+        { text: "机の上にものはおいていないか？", needsPhoto: true },
         ],
         extra: {
-          // 5: [{ text: "（金）週末の持ち帰り品を確認！", needsPhoto: true }],
+          // 5: [{ text: needsPhoto: true }],
         },
       },
       evening: {
@@ -59,9 +57,13 @@ window.userConfig = {
           { text: "薬は飲んだ？", needsPhoto: true },
           { text: "うにのシートはやった？", needsPhoto: true },
           { text: "うにの水は交換した？", needsPhoto: true },
-          { text: "靴は乾かした？", needsPhoto: true },
-        ],
-      },
+          { text: "マイクラのかごに入っているパジャマを使ったか", needsPhoto: true },    
+         { text: "机の上にものはおいていないか？", needsPhoto: true }, ],
+          extra: {
+          //2: [{ text: "（火）マイクラのかごに入っているパジャマを使ったか", needsPhoto: true }],
+         // : [{ text: "（木）マイクラのかごに入っているパジャマを使ったか", needsPhoto: true }],
+        },
+      },},
     },
     weekend: {
       morning: {
@@ -75,7 +77,7 @@ window.userConfig = {
           { text: "顔は洗った？", needsPhoto: false },
           { text: "洗濯物は畳んだ？", needsPhoto: true },
           { text: "洗い物はやった？", needsPhoto: true },
-          { text: "靴は乾かした？", needsPhoto: true },
+        { text: "机の上にものはおいていないか？", needsPhoto: true },
         ],
         // --- ここに曜日別の追加質問を入れられるわよ ---
         extra: {
@@ -97,7 +99,6 @@ window.userConfig = {
         label: "休日 / EVENING",
         common: [
           { text: "うにの散歩にいった？", needsPhoto: false },
-          { text: "腕立て伏せはした？", needsPhoto: false },
           { text: "うにのえさはやった？", needsPhoto: true },
           { text: "洗い物はやった？", needsPhoto: false },
           { text: "風呂には入った？", needsPhoto: false },
@@ -105,8 +106,11 @@ window.userConfig = {
           { text: "薬は飲んだ？", needsPhoto: true },
           { text: "うにのシートはやった？", needsPhoto: true },
           { text: "うにの水はやった？", needsPhoto: true },
-          { text: "靴は乾かした？", needsPhoto: true },
+          { text: "机の上にものはおいていないか？", needsPhoto: true },
+        { text:"マイクラのかごに入っているパジャマを使ったか", needsPhoto: true },
         ],
+       extra: {
+          // 6: [{ text: "（土）マイクラのかごに入っているパジャマを使ったか", needsPhoto: true }],
       },
     },
   },
