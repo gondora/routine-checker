@@ -1,6 +1,6 @@
 /**
  * しゅうじ専用：個別設定対応データ (曜日別 extra 対応版)
- * window.userConfig に格納して、共通の script.js から参照させるわよ。
+ * 構文エラーを修正し、ネスト構造を整理したわよ。
  */
 window.userConfig = {
   userName: "syuji",
@@ -20,13 +20,9 @@ window.userConfig = {
           { text: "持ち物(ハンカチ、ティッシュ)", needsPhoto: true },
         ],
         extra: {
-          1: [
-            { text: "（月）パジャマを選択のかごに入れる！", needsPhoto: true },
-            // { text: "（月）bonba- ！", needsPhoto: true },
-          ],
+          1: [{ text: "（月）パジャマを選択のかごに入れる！", needsPhoto: true }],
           3: [{ text: "（水）パジャマを選択のかごに入れる！", needsPhoto: true }],
           5: [{ text: "（金）パジャマを選択のかごに入れる！", needsPhoto: true }],
-          
         },
       },
       afternoon: {
@@ -40,11 +36,9 @@ window.userConfig = {
           { text: "洗い物はした？", needsPhoto: true },
           { text: "洗濯をたたんだ？", needsPhoto: true },
           { text: "タッチはやった？", needsPhoto: true },
-        { text: "机の上にものはおいていないか？", needsPhoto: true },
+          { text: "机の上にものはおいていないか？", needsPhoto: true },
         ],
-        extra: {
-          // 5: [{ text: needsPhoto: true }],
-        },
+        extra: {},
       },
       evening: {
         label: "平日 / EVENING",
@@ -57,14 +51,12 @@ window.userConfig = {
           { text: "薬は飲んだ？", needsPhoto: true },
           { text: "うにのシートはやった？", needsPhoto: true },
           { text: "うにの水は交換した？", needsPhoto: true },
-          { text: "マイクラのかごに入っているパジャマを使ったか", needsPhoto: true },    
-         { text: "机の上にものはおいていないか？", needsPhoto: true }, ],
-          extra: {
-          //2: [{ text: "（火）マイクラのかごに入っているパジャマを使ったか", needsPhoto: true }],
-         // : [{ text: "（木）マイクラのかごに入っているパジャマを使ったか", needsPhoto: true }],
-        },
-      },},
-    },
+          { text: "マイクラのかごに入っているパジャマを使ったか", needsPhoto: true },
+          { text: "机の上にものはおいていないか？", needsPhoto: true },
+        ],
+        extra: {},
+      } // ここが evening の終わり
+    }, // ここが weekday の終わり
     weekend: {
       morning: {
         label: "休日 / MORNING",
@@ -77,15 +69,13 @@ window.userConfig = {
           { text: "顔は洗った？", needsPhoto: false },
           { text: "洗濯物は畳んだ？", needsPhoto: true },
           { text: "洗い物はやった？", needsPhoto: true },
-        { text: "机の上にものはおいていないか？", needsPhoto: true },
+          { text: "机の上にものはおいていないか？", needsPhoto: true },
         ],
-        // --- ここに曜日別の追加質問を入れられるわよ ---
         extra: {
           0: [
             { text: "爪は切った？", needsPhoto: true },
             { text: "（日）パジャマを選択のかごに入れる！", needsPhoto: true }
-          ], 
-          //   0: [{ text: "（金）給食着は持った？", needsPhoto: true }], // 5は金曜日
+          ],
         },
       },
       afternoon: {
@@ -94,6 +84,7 @@ window.userConfig = {
           { text: "うにの散歩にいった？", needsPhoto: true },
           { text: "ボンバー", needsPhoto: true },
         ],
+        extra: {},
       },
       evening: {
         label: "休日 / EVENING",
@@ -107,11 +98,10 @@ window.userConfig = {
           { text: "うにのシートはやった？", needsPhoto: true },
           { text: "うにの水はやった？", needsPhoto: true },
           { text: "机の上にものはおいていないか？", needsPhoto: true },
-        { text:"マイクラのかごに入っているパジャマを使ったか", needsPhoto: true },
+          { text: "マイクラのかごに入っているパジャマを使ったか", needsPhoto: true },
         ],
-       extra: {
-          // 6: [{ text: "（土）マイクラのかごに入っているパジャマを使ったか", needsPhoto: true }],
-      },
-    },
-  },
-};
+        extra: {},
+      } // ここが weekend.evening の終わり
+    } // ここが weekend の終わり
+  } // ここが routineData の終わり
+}; // ここが全体の終わり
