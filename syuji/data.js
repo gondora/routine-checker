@@ -29,9 +29,6 @@ window.userConfig = {
         label: "平日 / AFTERNOON",
         common: [
           { text: "うにの散歩にいった？", needsPhoto: false },
-         { text: "靴を一つしか出していないか？(靴はパパのものを前にしてきれいに並べる)ゆうとのものいがい", needsPhoto: true 
-
-         },
           { text: "宿題はやった？", needsPhoto: true },
           { text: "給食セットは出した？", needsPhoto: true },
           { text: "鉛筆は削った？", needsPhoto: true },
@@ -40,6 +37,7 @@ window.userConfig = {
           { text: "洗濯をたたんだ？", needsPhoto: true },
           { text: "タッチはやった？", needsPhoto: true },
           { text: "机の上にものはおいていないか？", needsPhoto: true },
+          { text: "靴を一つしか出していないか？(靴はパパのものを前にしてきれいに並べる)ゆうとのものいがい", needsPhoto: true },
         ],
         extra: {},
       },
@@ -55,13 +53,15 @@ window.userConfig = {
           { text: "うにの水は交換した？", needsPhoto: true },
           { text: "マイクラのかごに入っているパジャマを使ったか", needsPhoto: true },
           { text: "机の上にものはおいていないか？", needsPhoto: true },
+          { text: "靴を一つしか出していないか？(靴はパパのものを前にしてきれいに並べる)ゆうとのものいがい", needsPhoto: true },
         ],
-        extra: {},     
-     1: [{ text: "（月）ウニの餌はやったか？", needsPhoto: true }],
-3: [{ text: "（水）ウニの餌はやったか？", needsPhoto: true }],
-5: [{ text: "（金）ウニの餌はやったか", needsPhoto: true }],
-      } // ここが evening の終わり
-    }, // ここが weekday の終わり
+        extra: {
+          1: [{ text: "（月）ウニの餌はやったか？", needsPhoto: true }],
+          3: [{ text: "（水）ウニの餌はやったか？", needsPhoto: true }],
+          5: [{ text: "（金）ウニの餌はやったか", needsPhoto: true }],
+        },
+      },
+    },
     weekend: {
       morning: {
         label: "休日 / MORNING",
@@ -79,8 +79,8 @@ window.userConfig = {
         extra: {
           0: [
             { text: "爪は切った？", needsPhoto: true },
-            { text: "（日）パジャマを選択のかごに入れる！", needsPhoto: true }
-          [{ text: "（日）ウニの餌はやったか？", needsPhoto: true }],
+            { text: "（日）パジャマを選択のかごに入れる！", needsPhoto: true },
+            { text: "（日）ウニの餌はやったか？", needsPhoto: true },
           ],
         },
       },
@@ -96,9 +96,7 @@ window.userConfig = {
         label: "休日 / EVENING",
         common: [
           { text: "うにの散歩にいった？", needsPhoto: false },
-          { text: "靴を一つしか出していないか？(靴はパパのものを前にしてきれいに並べる)ゆうとのものいがい", needsPhoto: true 
-
-          },         
+          { text: "靴を一つしか出していないか？(靴はパパのものを前にしてきれいに並べる)ゆうとのものいがい", needsPhoto: true },
           { text: "洗い物はやった？", needsPhoto: false },
           { text: "風呂には入った？", needsPhoto: false },
           { text: "歯は磨いた？", needsPhoto: false },
@@ -108,9 +106,10 @@ window.userConfig = {
           { text: "机の上にものはおいていないか？", needsPhoto: true },
           { text: "マイクラのかごに入っているパジャマを使ったか", needsPhoto: true },
         ],
-        extra: {},
-    0: [{ text: "（月）ウニの餌はやったか？", needsPhoto: true }],
-      } // ここが weekend.evening の終わり
-    } // ここが weekend の終わり
-  } // ここが routineData の終わり
-}; // ここが全体の終わり
+        extra: {
+          0: [{ text: "（日）ウニの餌はやったか？", needsPhoto: true }],
+        },
+      },
+    },
+  },
+};
