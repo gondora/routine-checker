@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Artifact-Lab Routine App</title>
+    <link rel="stylesheet" href="../../common/style.css" />
+  </head>
+  <body>
+    <div id="card">
+      <div id="time-label">LOADING...</div>
+      <h1 id="question-text">準備中...</h1>
+
+      <div id="evidence-container">
+        <div id="evidence-slot">
+          <span id="slot-placeholder">証拠未提出</span>
+        </div>
+      </div>
+
+      <button id="capture-btn" class="w100p mb_1rem button" onclick="startCapture()">撮影する</button>
+
+      <div class="btn-container mb_1rem" id="controls">
+        <button id="prev-btn" class="button" onclick="goToPrevQuestion()">前へ</button>
+        <button id="next-btn" class="button" onclick="goToNextQuestion()" disabled>次へ進む</button>
+      </div>
+      <a class="button w100p" href="../../index.html">TOPへ戻る</a>
+    </div>
+
+    <div id="camera-overlay">
+      <video id="camera-preview" autoplay playsinline></video>
+      <div class="countdown" id="timer">3</div>
+      <canvas id="shutter-canvas" style="display: none"></canvas>
+    </div>
+
+    <div class="resset_box">
+      <button onclick="resetLocalData()" class="resset_but">データリセット</button>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="../../common/script.js"></script>
+  </body>
+</html>
