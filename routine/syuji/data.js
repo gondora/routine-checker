@@ -14,6 +14,7 @@ window.userConfig = {
           { text: '持ち物(給食セット)', needsPhoto: true },
           { text: '持ち物(鍵)', needsPhoto: true },
           { text: '持ち物(ハンカチ、ティッシュ)', needsPhoto: true },
+          { text: '薬は塗った？（顔を洗った後）', needsPhoto: true },
         ],
         extra: {
           1: [
@@ -54,6 +55,7 @@ window.userConfig = {
           { text: '風呂には入った？', needsPhoto: false },
           { text: '歯は磨いた？', needsPhoto: false },
           { text: '薬は飲んだ？', needsPhoto: true },
+          { text: '薬は塗った？（お風呂上がり）', needsPhoto: true },
           {
             text: 'マイクラのかごに入っているパジャマを使ったか',
             needsPhoto: true,
@@ -99,6 +101,7 @@ window.userConfig = {
           { text: '洗濯物は畳んだ？', needsPhoto: true },
           { text: '洗い物はやった？', needsPhoto: true },
           { text: '机の上にものはおいていないか？', needsPhoto: true },
+          { text: '薬は塗った？（顔を洗った後）', needsPhoto: true },
         ],
         extra: {
           0: [
@@ -130,6 +133,7 @@ window.userConfig = {
           { text: '風呂には入った？', needsPhoto: false },
           { text: '歯は磨いた？', needsPhoto: false },
           { text: '薬は飲んだ？', needsPhoto: true },
+          { text: '薬は塗った？（お風呂上がり）', needsPhoto: true },
           { text: '机の上にものはおいていないか？', needsPhoto: true },
           {
             text: 'マイクラのかごに入っているパジャマを使ったか',

@@ -47,6 +47,7 @@ window.userConfig = {
             text: '靴を一つしか出していないか？(靴はパパのものを前にしてきれいに並べる)しゅうじのものいがい',
             needsPhoto: true,
           },
+          { text: '薬は塗った？（お風呂上がり）', needsPhoto: true },
         ],
         extra: {
           1: [{ text: 'ウニシートはやったか？', needsPhoto: true }],
@@ -94,6 +95,7 @@ window.userConfig = {
           },
           { text: '歯は磨いた？', needsPhoto: false },
           { text: '机の上にものはおいていないか？', needsPhoto: true },
+          { text: '薬は塗った？（お風呂上がり）', needsPhoto: true },
         ],
         extra: {
           6: [
