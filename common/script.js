@@ -81,8 +81,8 @@ function getTargetData() {
   const dayKey = isWeekend ? 'weekend' : 'weekday';
 
   let tKey = 'evening';
-  if (hour >= 5 && hour < 11) tKey = 'morning';
-  else if (hour >= 11 && hour < 18) tKey = 'afternoon';
+  if (hour >= 5 && hour < 12) tKey = 'morning';
+  else if (hour >= 12 && hour < 18) tKey = 'afternoon';
 
   const data = routineData[dayKey][tKey];
 
@@ -220,13 +220,11 @@ function renderImage(dataUrl) {
 function saveToLocal(taskId, dataUrl) {
   if (!db) return;
   const transaction = db.transaction(['photos'], 'readwrite');
-  transaction
-    .objectStore('photos')
-    .put({
-      taskId: taskId,
-      image: dataUrl,
-      date: new Date().toLocaleDateString(),
-    });
+  transaction.objectStore('photos').put({
+    taskId: taskId,
+    image: dataUrl,
+    date: new Date().toLocaleDateString(),
+  });
 }
 
 function restoreSavedImage() {

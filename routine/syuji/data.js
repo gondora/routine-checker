@@ -105,7 +105,7 @@ window.userConfig = {
         ],
         extra: {
           0: [
-            { text: '爪は切った？', needsPhoto: true },
+            { text: '爪は切った？(2週目に足の爪を切る)', needsPhoto: true },
             { text: '（日）パジャマを洗濯のかごに入れる！', needsPhoto: true },
             { text: '（日）ウニの餌はやったか？', needsPhoto: true },
           ],
