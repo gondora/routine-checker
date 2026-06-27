@@ -35,6 +35,7 @@ window.userConfig = {
             text: '靴を一つしか出していないか？(靴はパパのものを前にしてきれいに並べる)しゅうじのものいがい',
             needsPhoto: true,
           },
+         { text: '目の体操はやったか？', needsPhoto: false },
         ],
       },
       evening: {
@@ -83,8 +84,9 @@ window.userConfig = {
       },
       afternoon: {
         label: '休日 / AFTERNOON',
-        common: [{ text: 'ウニの散歩にいった？', needsPhoto: false }],
-      },
+        common: [{ text: 'ウニの散歩にいった？', needsPhoto: false },
+    { text: '目の体操はしたか？', needsPhoto: false },
+        ],},
       evening: {
         label: '休日 / EVENING',
         common: [
