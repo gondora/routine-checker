@@ -35,7 +35,7 @@ window.userConfig = {
             text: '靴を一つしか出していないか？(靴はパパのものを前にしてきれいに並べる)しゅうじのものいがい',
             needsPhoto: true,
           },
-         { text: '目の体操はやったか？', needsPhoto: false },
+{ text: '目の体操はやったか？', needsPhoto: false },
         ],
       },
       evening: {
@@ -49,6 +49,7 @@ window.userConfig = {
             needsPhoto: true,
           },
           { text: '薬は塗った？（お風呂上がり）', needsPhoto: true },
+        { text: '目の体操はやったか？', needsPhoto: false }
         ],
         extra: {
           1: [{ text: 'ウニシートはやったか？', needsPhoto: true }],
@@ -73,6 +74,7 @@ window.userConfig = {
           { text: '顔は洗った？', needsPhoto: false },
           { text: 'ウニの散歩にいった？', needsPhoto: false },
           { text: 'ピアノはやった？', needsPhoto: true }, // ここにあるから日曜のextraからは消したわ
+    { text: '目の体操はやったか？', needsPhoto: false }
         ],
         extra: {
           6: [{ text: '(土)ピアノの準備はした？', needsPhoto: true }], // 6は土曜日
@@ -98,7 +100,7 @@ window.userConfig = {
           { text: '歯は磨いた？', needsPhoto: false },
           { text: '机の上にものはおいていないか？', needsPhoto: true },
           { text: '薬は塗った？（お風呂上がり）', needsPhoto: true },
-        ],
+      { text: '目の体操はやったか？', needsPhoto: false }  ],
         extra: {
           6: [
             { text: 'ウニの餌はやったか？', needsPhoto: true },

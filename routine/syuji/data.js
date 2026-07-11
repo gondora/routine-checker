@@ -64,6 +64,7 @@ window.userConfig = {
             text: '靴は一つしか出していないか【靴はパパのものを前にして綺麗に並べる】ゆうとのもの以外',
             needsPhoto: true,
           },
+  { text: '目の体操はやったか？', needsPhoto: false }
         ],
         extra: {
           1: [
@@ -100,6 +101,7 @@ window.userConfig = {
           { text: '洗濯物は畳んだ？', needsPhoto: true },
           { text: '洗い物はやった？', needsPhoto: true },
           { text: '机の上にものはおいていないか？', needsPhoto: true },
+          { text: '目の体操はやったか？', needsPhoto: true },
         ],
         extra: {
           0: [
@@ -114,19 +116,14 @@ window.userConfig = {
         common: [
           { text: 'うにの散歩にいった？', needsPhoto: false },
           { text: 'ボンバー', needsPhoto: false },
-       { text: '目の体操はやったか？', needsPhoto: false },  ],
+{ text: '目の体操はやったか？', needsPhoto: false },  ],
         extra: {},
       },
       evening: {
         label: '休日 / EVENING',
         common: [
-          { text: 'うにのシートはやった？', needsPhoto: true },
-          { text: 'うにの水はやった？', needsPhoto: true },
           { text: 'うにの散歩にいった？', needsPhoto: false },
-          {
-            text: '靴を一つしか出していないか？(靴はパパのものを前にしてきれいに並べる)ゆうとのものいがい',
-            needsPhoto: true,
-          },
+          { text: '靴を一つしか出していないか？(靴はパパのものを前にしてきれいに並べる)ゆうとのものいがい',needsPhoto: true,},
           { text: '洗い物はやった？', needsPhoto: false },
           { text: '風呂には入った？', needsPhoto: false },
           { text: '歯は磨いた？', needsPhoto: false },
@@ -136,6 +133,7 @@ window.userConfig = {
             text: 'マイクラのかごに入っているパジャマを使ったか',
             needsPhoto: true,
           },
+       { text: '目の体操はやったか？', needsPhoto: false }
         ],
         extra: {
           // ↓ アンタが外に書き漏らしていたやつは、ここに収納したわよ！
