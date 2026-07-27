@@ -24,6 +24,7 @@ window.userConfig = {
         label: '平日 / AFTERNOON',
         common: [
           { text: 'ウニの散歩にいった？', needsPhoto: false },
+        
           { text: '宿題はやった？', needsPhoto: true },
           { text: '給食セットは出した？', needsPhoto: true },
           { text: '鉛筆は削った？', needsPhoto: true },
@@ -35,8 +36,8 @@ window.userConfig = {
             text: '靴を一つしか出していないか？(靴はパパのものを前にしてきれいに並べる)しゅうじのものいがい',
             needsPhoto: true,
           },
-{ text: '目の体操はやったか？', needsPhoto: false },
-        ],
+{ text: '目の体操はやったか？', needsPhoto: false },      
+],
       },
       evening: {
         label: '平日 / EVENING',
@@ -49,20 +50,24 @@ window.userConfig = {
             needsPhoto: true,
           },
           { text: '薬は塗った？（お風呂上がり）', needsPhoto: true },
-        { text: '目の体操はやったか？', needsPhoto: false }
-        ],
+        { text: '目の体操はやったか？', needsPhoto: false },
+{ text: '洗い物はやったか', needsPhoto: false }, 
+      ],
         extra: {
-          1: [{ text: 'ウニシートはやったか？', needsPhoto: true }],
+          1: [{ text: 'ウニシートはやったか？1', needsPhoto: true }],
+          1: [{ text: 'ウニシートはやったか？2', needsPhoto: true }],
           2: [
             { text: 'ウニの餌はやったか？', needsPhoto: true },
             { text: 'ウニ水はやったか？', needsPhoto: true },
           ],
-          3: [{ text: 'ウニのシートはやったか？', needsPhoto: true }],
+          3: [{ text: 'ウニのシートはやったか？1', needsPhoto: true }],
+          3: [{ text: 'ウニシートはやったか？2', needsPhoto: true }],
           4: [
             { text: 'ウニの餌はやったか？', needsPhoto: true },
             { text: 'ウニの水はやったか？', needsPhoto: true },
           ],
-          5: [{ text: 'ウニのシートはやったか？', needsPhoto: true }],
+          5: [{ text: 'ウニのシートはやったか？1', needsPhoto: true }],
+ 5: [{ text: 'ウニシートはやったか？2', needsPhoto: true }],
         },
       },
     },
@@ -106,7 +111,8 @@ window.userConfig = {
             { text: 'ウニの餌はやったか？', needsPhoto: true },
             { text: 'ウニの水はやったか？', needsPhoto: true },
           ],
-          0: [{ text: 'ウニのシートはやったか？', needsPhoto: true }],
+          0: [{ text: 'ウニのシートはやったか？1', needsPhoto: true }],
+          0: [{ text: 'ウニのシートはやったか？2', needsPhoto: true }],
         },
       },
     },

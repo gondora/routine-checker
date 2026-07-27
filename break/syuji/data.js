@@ -8,20 +8,18 @@ window.userConfig = {
         common: [
           { text: 'くすりは飲んだ？', needsPhoto: true },
           { text: 'うにの散歩にいった？', needsPhoto: false },
-          {
-            text: '靴を一つしか出していないか？(靴はパパのものを前にしてきれいに並べる)ゆうとのものいがい',
-            needsPhoto: true,
-          },
+           { text: '宿題はやった？(今日の課題の宿題)課題の宿題は自分のテーブルを見るそれができないときは他のものをやるかやらなくても良い', needsPhoto: true },
           { text: '着替えはした？', needsPhoto: false },
           { text: '朝ごはんは食べた？', needsPhoto: false },
           { text: '歯磨きはした？', needsPhoto: false },
           { text: '顔は洗った？', needsPhoto: false },
-          { text: '宿題はやった？(一日5ページやる)', needsPhoto: true },
-        ],
+      ],
         extra: {
           1: [
             { text: '（月）パジャマを洗濯のかごに入れる！', needsPhoto: true },
           ],
+      
+       
           3: [
             { text: '（水）パジャマを洗濯のかごに入れる！', needsPhoto: true },
           ],
@@ -34,20 +32,15 @@ window.userConfig = {
         label: '平日 / AFTERNOON',
         common: [
           { text: 'うにの散歩にいった？', needsPhoto: false },
-          {
-            text: '靴を一つしか出していないか？(靴はパパのものを前にしてきれいに並べる)ゆうとのものいがい',
-            needsPhoto: true,
-          },
           { text: '洗い物はした？', needsPhoto: true },
           { text: '洗濯をたたんだ？', needsPhoto: true },
-          { text: 'タッチはやった？', needsPhoto: true },
         ],
         extra: {},
       },
       evening: {
         label: '平日 / EVENING',
         common: [
-          { text: '腕立て伏せはした？( 一日30回やる)', needsPhoto: false },
+          { text: '腕立て伏せはした？( 一日40回やる)', needsPhoto: false },
           { text: '洗い物はやった？', needsPhoto: true },
           { text: '風呂には入った？', needsPhoto: false },
           { text: '歯は磨いた？', needsPhoto: false },
@@ -67,12 +60,14 @@ window.userConfig = {
             { text: 'ウニの餌はやったか？', needsPhoto: true },
             { text: 'うにの水は交換した？', needsPhoto: true },
           ],
-          2: [{ text: 'うにのシートはやった？', needsPhoto: true }],
+          2: [{ text: 'うにのシートはやった？1', needsPhoto: true }],
+          2: [{ text: 'うにのシートはやった？2', needsPhoto: true }],
           3: [
             { text: 'ウニの餌はやったか？', needsPhoto: true },
             { text: 'うにの水は交換した？', needsPhoto: true },
           ],
-          4: [{ text: 'うにのシートはやった？', needsPhoto: true }],
+          4: [{ text: 'うにのシートはやった？1', needsPhoto: true }],
+          4: [{ text: 'うにのシートはやった？2', needsPhoto: true }],
           5: [
             { text: 'ウニの餌はやったか？', needsPhoto: true },
             { text: 'うにの水は交換した？', needsPhoto: true },
@@ -88,7 +83,7 @@ window.userConfig = {
           0: [{ text: 'bonb', needsPhoto: false }], // extraTop のカンマのつけ方を直したわよ
         },
         common: [
-          { text: 'くすりは飲んだ？', needsPhoto: true },
+          { text: 'くりは飲んだ？', needsPhoto: true },
           { text: 'うにの散歩', needsPhoto: false },
           { text: '着替えはした？', needsPhoto: false },
           { text: '朝ごはんは食べた？', needsPhoto: false },
@@ -97,6 +92,7 @@ window.userConfig = {
           { text: '洗濯物は畳んだ？', needsPhoto: true },
           { text: '洗い物はやった？', needsPhoto: true },
           { text: '机の上にものはおいていないか？', needsPhoto: true },
+       { text: '宿題はやった？(今日の課題の宿題)課題の宿題は自分のテーブルを見るそれができないときは他のものをやるかやらなくても良い', needsPhoto: true },
         ],
         extra: {
           0: [
@@ -139,7 +135,8 @@ window.userConfig = {
             { text: 'ウニの餌はやったか？', needsPhoto: true },
             { text: 'うにの水は交換した？', needsPhoto: true },
           ],
-          6: [{ text: 'うにのシートはやった？', needsPhoto: true }],
+          6: [{ text: 'うにのシートはやった？1', needsPhoto: true }],
+          6: [{ text: 'うにのシートはやった？2', needsPhoto: true }],
         },
       }, // ここが weekend.evening の終わり
     }, // ここが weekend の終わり
