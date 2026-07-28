@@ -51,19 +51,18 @@ window.userConfig = {
           },
         ],
         extra: {
-          1: [{ text: 'ウニのシートはやったか？1', needsPhoto: true }],
-          1: [{ text: 'うにのシートはやった？1', needsPhoto: true }],2: [
-            { text: 'ウニの餌はやったか？', needsPhoto: true },
+        1: [{ text: 'うにのシートはやった？1', needsPhoto: true }, { text: 'うにのシートはやった？2', needsPhoto: true }],
+
+           2: [ { text: 'ウニの餌はやったか？', needsPhoto: true },
             { text: 'ウニの水はやったか？', needsPhoto: true },
           ],
-          3: [{ text: 'ウニのシートはやったか？1', needsPhoto: true }],
-         3: [{ text: 'うにのシートはやった？1', needsPhoto: true }],
+         3: [{ text: 'うにのシートはやった？1', needsPhoto: true }, { text: 'うにのシートはやった？2', needsPhoto: true }],
           4: [
             { text: 'ウニの餌はやったか？', needsPhoto: true },
             { text: 'ウニの水はやったか？', needsPhoto: true },
           ],
-          5: [{ text: 'ウニのシートはやったか？1', needsPhoto: true }],  
-        5: [{ text: 'うにのシートはやった？2', needsPhoto: true }],},
+          5: [{ text: 'うにのシートはやった？1', needsPhoto: true }, { text: 'うにのシートはやった？2', needsPhoto: true }],  
+        },
       },
     },
     weekend: {
@@ -108,9 +107,8 @@ window.userConfig = {
             { text: 'ウニの餌はやったか？', needsPhoto: true },
             { text: 'ウニの水はやったか？', needsPhoto: true },
           ],
-          0: [{ text: 'ウニのシートはやったか？', needsPhoto: true }],
-       0: [{ text: 'うにのシートはやった？1', needsPhoto: true }],
-        },
+      0: [{ text: 'うにのシートはやった？1', needsPhoto: true }, { text: 'うにのシートはやった？2', needsPhoto: true }],
+      },
       },
     },
   },

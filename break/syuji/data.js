@@ -56,18 +56,16 @@ window.userConfig = {
           },
         ],
         extra: {
-          1: [
+1: [
             { text: 'ウニの餌はやったか？', needsPhoto: true },
             { text: 'うにの水は交換した？', needsPhoto: true },
           ],
-          2: [{ text: 'うにのシートはやった？1', needsPhoto: true }],
-          2: [{ text: 'うにのシートはやった？2', needsPhoto: true }],
+          2: [{ text: 'うにのシートはやった？1', needsPhoto: true }, { text: 'うにのシートはやった？2', needsPhoto: true }],
           3: [
             { text: 'ウニの餌はやったか？', needsPhoto: true },
             { text: 'うにの水は交換した？', needsPhoto: true },
           ],
-          4: [{ text: 'うにのシートはやった？1', needsPhoto: true }],
-          4: [{ text: 'うにのシートはやった？2', needsPhoto: true }],
+        4: [{ text: 'うにのシートはやった？1', needsPhoto: true }, { text: 'うにのシートはやった？2', needsPhoto: true }],
           5: [
             { text: 'ウニの餌はやったか？', needsPhoto: true },
             { text: 'うにの水は交換した？', needsPhoto: true },
