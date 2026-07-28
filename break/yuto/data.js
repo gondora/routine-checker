@@ -20,7 +20,9 @@ window.userConfig = {
           { text: '歯磨きはした？', needsPhoto: false },
           { text: '洗い物はやったか', needsPhoto: false },
         { text: '宿題はやった？(今日の課題の宿題)', needsPhoto: true },
-       
+        { text: '洗い物はやったか', needsPhoto: true },
+       { text: '洗濯をたたんだ？', needsPhoto: true },
+       { text: '目の体操はやったか', needsPhoto: true },
       ],
         extra: {
           5: [{ text: 'プールの準備はした？', needsPhoto: false }], // 5は金曜日
@@ -52,7 +54,6 @@ window.userConfig = {
         ],
         extra: {
         1: [{ text: 'うにのシートはやった？1', needsPhoto: true }, { text: 'うにのシートはやった？2', needsPhoto: true }],
-
            2: [ { text: 'ウニの餌はやったか？', needsPhoto: true },
             { text: 'ウニの水はやったか？', needsPhoto: true },
           ],
@@ -75,6 +76,7 @@ window.userConfig = {
           { text: 'ピアノはやった？', needsPhoto: true }, // ここにあるから日曜のextraからは消したわ
         { text: '宿題はやった？', needsPhoto: false },
         { text: '目の体操', needsPhoto: false }, 
+     { text: '洗い物はやったか', needsPhoto: true },
       ],
         extra: {
           6: [

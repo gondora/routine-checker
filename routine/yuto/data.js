@@ -15,6 +15,7 @@ window.userConfig = {
           { text: '持ち物(給食セット)', needsPhoto: true },
           { text: '持ち物(ハンカチ、ティッシュ)', needsPhoto: true },
           { text: '持ち物(鍵)', needsPhoto: true },
+        { text: '洗い物はやったか', needsPhoto: true },
         ],
         extra: {
           5: [{ text: 'プールの準備はした？', needsPhoto: false }], // 5は金曜日
@@ -51,7 +52,7 @@ window.userConfig = {
           },
           { text: '薬は塗った？（お風呂上がり）', needsPhoto: true },
         { text: '目の体操はやったか？', needsPhoto: false },
-{ text: '洗い物はやったか', needsPhoto: false }, 
+ { text: '洗い物はやったか', needsPhoto: true },
       ],
         extra: {
          1: [{ text: 'うにのシートはやった？1', needsPhoto: true }, { text: 'うにのシートはやった？2', needsPhoto: true }],
