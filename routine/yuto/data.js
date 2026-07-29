@@ -31,6 +31,7 @@ window.userConfig = {
           { text: '鉛筆は削った？', needsPhoto: true },
           { text: '学校から出た手紙は出した？', needsPhoto: true },
           { text: '洗濯をたたんだ？(ぜんたいをうつす)', needsPhoto: true },
+        { text: '洗い物はやったか', needsPhoto: false }, 
           { text: 'ピアノはやった？', needsPhoto: true },
           { text: '机の上にものはおいていないか？', needsPhoto: true },
           {

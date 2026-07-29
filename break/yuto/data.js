@@ -33,7 +33,8 @@ window.userConfig = {
         common: [
   { text: 'ウニの散歩にいった？', needsPhoto: false },
   { text: '洗い物はやったか', needsPhoto: true } ,
-          { text: 'ピアノはやった？', needsPhoto: true },
+   { text: '洗濯物はやった？', needsPhoto: false },
+  { text: 'ピアノはやった？', needsPhoto: true },
           { text: '机の上にものはおいていないか？', needsPhoto: true },
           {
             text: '靴を一つしか出していないか？(靴はパパのものを前にしてきれいに並べる)しゅうじのものいがい',
@@ -44,12 +45,16 @@ window.userConfig = {
       evening: {
         label: '平日 / EVENING',
         common: [
+          { text: '風呂に入ったか', needsPhoto: false },
           { text: '歯は磨いた？', needsPhoto: false },
           { text: '机の上にものはおいていないか？', needsPhoto: true },
           {
             text: '靴を一つしか出していないか？(靴はパパのものを前にしてきれいに並べる)しゅうじのものいがい',
             needsPhoto: true,
           },
+          { text: '薬は塗った？（お風呂上がり）', needsPhoto: true },
+        { text: '目の体操はやったか？', needsPhoto: false },
+ { text: '洗い物はやったか', needsPhoto: true },
         ],
         extra: {
         1: [{ text: 'うにのシートはやった？1', needsPhoto: true }, { text: 'うにのシートはやった？2', needsPhoto: true }],
@@ -75,7 +80,7 @@ window.userConfig = {
           { text: 'ピアノはやった？', needsPhoto: true }, // ここにあるから日曜のextraからは消したわ
         { text: '宿題はやった？', needsPhoto: false },
         { text: '目の体操', needsPhoto: false }, 
-     { text: '洗い物はやったか', needsPhoto: true },
+    
       ],
         extra: {
           6: [
