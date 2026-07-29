@@ -31,7 +31,7 @@ window.userConfig = {
       afternoon: {
         label: '平日 / AFTERNOON',
         common: [
-  { text: 'ウニの餌はやったか？', needsPhoto: true },
+  { text: 'ウニの散歩にいった？', needsPhoto: false },
   { text: 'ウニの水はやったか？', needsPhoto: true },
   { text: '洗い物はやったか', needsPhoto: true } ,
           { text: 'ピアノはやった？', needsPhoto: true },
