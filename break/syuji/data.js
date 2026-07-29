@@ -18,8 +18,6 @@ window.userConfig = {
           1: [
             { text: '（月）パジャマを洗濯のかごに入れる！', needsPhoto: true },
           ],
-      
-       
           3: [
             { text: '（水）パジャマを洗濯のかごに入れる！', needsPhoto: true },
           ],
