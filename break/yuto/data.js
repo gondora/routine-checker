@@ -31,7 +31,7 @@ window.userConfig = {
       afternoon: {
         label: '平日 / AFTERNOON',
         common: [
-  { text: 'ウニの散歩にいったAAA？', needsPhoto: false },
+  { text: 'ウニの散歩にいった？', needsPhoto: false },
   { text: '洗い物はやったか', needsPhoto: true } ,
    { text: '洗濯物はやった？', needsPhoto: false },
   { text: 'ピアノはやった？', needsPhoto: true },
@@ -45,17 +45,16 @@ window.userConfig = {
       evening: {
         label: '平日 / EVENING',
         common: [
-          { text: '風呂に入ったか', needsPhoto: false },
-          { text: '歯は磨いた？', needsPhoto: false },
-          { text: '机の上にものはおいていないか？', needsPhoto: true },
-          {
-            text: '靴を一つしか出していないか？(靴はパパのものを前にしてきれいに並べる)しゅうじのものいがい',
-            needsPhoto: true,
-          },
-          { text: '薬は塗った？（お風呂上がり）', needsPhoto: true },
-        { text: '目の体操はやったか？', needsPhoto: false },
- { text: '洗い物はやったか', needsPhoto: true },
-        ],
+         { text: '風呂に入ったか', needsPhoto: false },
+         { text: '歯は磨いたか', needsPhoto: false },
+         { text: '机の上には何もおいていないか【全部キレイにする】', needsPhoto: true },
+         { text: '靴は綺麗にしたか', needsPhoto:   true },
+         { text: '薬は塗った？（お風呂上がり）', needsPhoto: true },
+         { text: '靴は綺麗にしたか', needsPhoto:  true },
+        { text: '目の体操はやったか', needsPhoto: true  },
+        { text: '洗い物はやったか？', needsPhoto: true },
+        
+      ],
         extra: {
         1: [{ text: 'うにのシートはやった？1', needsPhoto: true }, { text: 'うにのシートはやった？2', needsPhoto: true }],
            2: [ { text: 'ウニの餌はやったか？', needsPhoto: true },
