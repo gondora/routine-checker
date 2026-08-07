@@ -1,4 +1,4 @@
-window.userConfig = {
+  window.userConfig = {
   userName: 'syuji',
   dbName: 'RoutineMissionDB_syuji',
   routineData: {
@@ -13,7 +13,9 @@ window.userConfig = {
           { text: '朝ごはんは食べた？', needsPhoto: false },
           { text: '歯磨きはした？', needsPhoto: false },
           { text: '顔は洗った？', needsPhoto: false },
-      ],
+      { text: '洗い物はやったか？', needsPhoto: true },
+         { text: '洗濯物は畳んだ？', needsPhoto: true },
+    ],
         extra: {
           1: [
             { text: '（月）パジャマを洗濯のかごに入れる！', needsPhoto: true },

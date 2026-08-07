@@ -18,7 +18,6 @@ window.userConfig = {
           { text: '着替えはした？', needsPhoto: false },
           { text: '朝ごはんは食べた？', needsPhoto: false },
           { text: '歯磨きはした？', needsPhoto: false },
-          { text: '洗い物はやったか', needsPhoto: false },
         { text: '宿題はやった？(今日の課題の宿題)', needsPhoto: true },
         { text: '洗い物はやったか', needsPhoto: true },
        { text: '洗濯をたたんだ？', needsPhoto: true },
