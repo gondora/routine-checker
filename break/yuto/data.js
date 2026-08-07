@@ -44,7 +44,7 @@ window.userConfig = {
       evening: {
         label: '平日 / EVENING',
         common: [
-         { text: '風呂に入ったか', needsPhoto: false },
+         { text: 'aaa風呂に入ったか', needsPhoto: false },
          { text: '歯は磨いたか', needsPhoto: false },
          { text: '机の上には何もおいていないか【全部キレイにする】', needsPhoto: true },
          { text: '靴は綺麗にしたか', needsPhoto:   true },
